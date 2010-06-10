@@ -13,6 +13,8 @@ var insertMode = false;
 var findMode = false;
 var findModeQuery = "";
 var findModeQueryHasResults = false;
+var commandMode = false;
+var commandModeQuery = "";
 var isShowingHelpDialog = false;
 var keyPort;
 var settingPort;
@@ -298,6 +300,27 @@ function onKeydown(event) {
     else if (event.keyCode == keyCodes.enter)
       handleEnterForFindMode();
   }
+  else if (commandMode)
+  {
+    if (isEscape(event))
+      exitCommandMode();
+    else if (keyChar)
+    {
+      handleKeyCharForCommandMode(keyChar);
+
+      // Don't let the space scroll us if we're typing an command.
+      if (event.keyCode == keyCodes.space)
+        event.preventDefault();
+    }
+    // Don't let backspace take us back in history.
+    else if (event.keyCode == keyCodes.backspace || event.keyCode == keyCodes.deleteKey)
+    {
+      handleDeleteForCommandMode();
+      event.preventDefault();
+    }
+    else if (event.keyCode == keyCodes.enter)
+      handleEnterForCommandMode();
+  }
   else if (isShowingHelpDialog && isEscape(event))
   {
     hideHelpDialog();
@@ -426,6 +449,51 @@ function showFindModeHUDForQuery() {
     HUD.show("/" + insertSpaces(findModeQuery + " (No Matches)"));
 }
 
+function handleKeyCharForCommandMode(keyChar) {
+  commandModeQuery = commandModeQuery + keyChar;
+  showCommandModeHUDForQuery();
+}
+
+function handleDeleteForCommandMode() {
+  if (commandModeQuery.length == 0)
+  {
+    exitCommandMode();
+  }
+  else
+  {
+    commandModeQuery = commandModeQuery.substring(0, commandModeQuery.length - 1);
+    showCommandModeHUDForQuery();
+  }
+}
+
+function handleEnterForCommandMode() {
+  exitCommandMode();
+  var commandName, commandArgs;
+  var spacePosition = commandModeQuery.indexOf(' ');
+  if (spacePosition >= 0) 
+  {
+    commandName = commandModeQuery.substring(0, spacePosition);
+    commandArgs = commandModeQuery.substring(spacePosition+1, commandModeQuery.length);
+  }
+  else
+  {
+    commandName = commandModeQuery
+  }
+  executeCommand(commandName, commandArgs);
+}
+
+function showCommandModeHUDForQuery() {
+  HUD.show(":"+commandModeQuery);
+}
+
+function executeCommand(name, args){
+  eval("vimium_"+name+"(args)");
+}
+
+function vimium_open(callback){
+    chrome.tabs.create({}, function(tab) { callback(); });
+}
+
 /*
  * We need this so that the find mode HUD doesn't match its own searches.
  */
@@ -451,6 +519,17 @@ function enterFindMode() {
 
 function exitFindMode() {
   findMode = false;
+  HUD.hide();
+}
+
+function enterCommandMode() {
+  commandModeQuery = "";
+  commandMode = true;
+  HUD.show(":");
+}
+
+function exitCommandMode() {
+  commandMode = false;
   HUD.hide();
 }
 

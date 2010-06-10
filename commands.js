@@ -103,6 +103,7 @@ function clearKeyMappingsAndSetDefaults() {
   mapKeyToCommand('F', 'activateLinkHintsModeToOpenInNewTab');
 
   mapKeyToCommand('/', 'enterFindMode');
+  mapKeyToCommand(':', 'enterCommandMode');
   mapKeyToCommand('n', 'performFind');
   mapKeyToCommand('N', 'performBackwardsFind');
 
@@ -143,6 +144,7 @@ addCommand('activateLinkHintsMode',               'Enter link hints mode to open
 addCommand('activateLinkHintsModeToOpenInNewTab', 'Enter link hints mode to open links in new tab');
 
 addCommand('enterFindMode',        'Enter find mode');
+addCommand('enterCommandMode',     'Enter command mode');
 addCommand('performFind',          'Cycle forward to the next find match');
 addCommand('performBackwardsFind', 'Cycle backward to the previous find match');
 
@@ -166,7 +168,7 @@ var commandGroups = {
      "scrollToTop", "scrollToBottom", "scrollPageDown", "scrollPageUp", "scrollFullPageDown",
      "reload", "toggleViewSource", "zoomIn", "zoomOut", "copyCurrentUrl",
      "enterInsertMode", "activateLinkHintsMode", "activateLinkHintsModeToOpenInNewTab",
-     "enterFindMode", "performFind", "performBackwardsFind"],
+     "enterFindMode", "enterCommandMode", "performFind", "performBackwardsFind"],
   historyNavigation:
     ["goBack", "goForward"],
   tabManipulation:
@@ -174,3 +176,4 @@ var commandGroups = {
   misc:
     ["showHelp"]
 };
+

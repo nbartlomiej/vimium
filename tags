@@ -1,0 +1,162 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.7	//
+activateLinkHintsMode	linkHints.js	/^function activateLinkHintsMode(openInNewTab) {$/;"	f
+activateLinkHintsModeToOpenInNewTab	linkHints.js	/^function activateLinkHintsModeToOpenInNewTab() { activateLinkHintsMode(true); }$/;"	f
+addCommand	commands.js	/^function addCommand(command, description, isBackgroundCommand) {$/;"	f
+addCssToPage	vimiumFrontend.js	/^function addCssToPage(css) {$/;"	f
+anchorSpot	test_harnesses/page_with_links.html	/^  <a name="anchorSpot">An anchor with just a name<\/a>$/;"	a
+buildLinkHints	linkHints.js	/^function buildLinkHints() {$/;"	f
+checkDivsForVisibility	test_harnesses/visibility_test.html	/^    function checkDivsForVisibility() {$/;"	f
+checkKeyQueue	background_page.html	/^  function checkKeyQueue(keysToCheck, tabId) {$/;"	f
+commandMode	vimiumFrontend.js	/^var commandMode = false;$/;"	v
+commandModeQuery	vimiumFrontend.js	/^var commandModeQuery = "";$/;"	v
+compareVersions	background_page.html	/^  function compareVersions(versionA, versionB) {$/;"	f
+copyCurrentUrl	vimiumFrontend.js	/^function copyCurrentUrl() {$/;"	f
+createMarkerFor	linkHints.js	/^function createMarkerFor(link, linkHintNumber, linkHintDigits) {$/;"	f
+createTab	background_page.html	/^  function createTab(callback) {$/;"	f
+currentCompletionKeys	vimiumFrontend.js	/^var currentCompletionKeys;$/;"	v
+currentZoomLevel	vimiumFrontend.js	/^var currentZoomLevel = 100;$/;"	v
+deactivateLinkHintsMode	linkHints.js	/^function deactivateLinkHintsMode() {$/;"	f
+element	vimiumFrontend.js	/^    var element = document.createElement("div");$/;"	v
+enableSaveButton	options.html	/^  function enableSaveButton() { $("saveOptions").removeAttribute("disabled"); }$/;"	f
+enterCommandMode	vimiumFrontend.js	/^function enterCommandMode() {$/;"	f
+enterFindMode	vimiumFrontend.js	/^function enterFindMode() {$/;"	f
+enterInsertMode	vimiumFrontend.js	/^function enterInsertMode() {$/;"	f
+enterInsertModeIfElementIsFocused	vimiumFrontend.js	/^function enterInsertModeIfElementIsFocused() {$/;"	f
+escapeHtml	background_page.html	/^  function escapeHtml(string) { return string.replace(\/<\/g, "&lt;").replace(\/>\/g, "&gt;"); }$/;"	f
+exitCommandMode	vimiumFrontend.js	/^function exitCommandMode() {$/;"	f
+exitFindMode	vimiumFrontend.js	/^function exitFindMode() {$/;"	f
+exitInsertMode	vimiumFrontend.js	/^function exitInsertMode() {$/;"	f
+fetchFileContents	background_page.html	/^  function fetchFileContents(extensionFileName) {$/;"	f
+findMode	vimiumFrontend.js	/^var findMode = false;$/;"	v
+findModeQuery	vimiumFrontend.js	/^var findModeQuery = "";$/;"	v
+findModeQueryHasResults	vimiumFrontend.js	/^var findModeQueryHasResults = false;$/;"	v
+generateCompletionKeys	background_page.html	/^  function generateCompletionKeys(keysToCheck) {$/;"	f
+getActualKeyStrokeLength	background_page.html	/^  function getActualKeyStrokeLength(key) {$/;"	f
+getCompletionKeys	background_page.html	/^  function getCompletionKeys(request) {$/;"	f
+getCurrentTabUrl	background_page.html	/^  function getCurrentTabUrl(args, port) {$/;"	f
+getCurrentTimeInSeconds	background_page.html	/^  function getCurrentTimeInSeconds() { Math.floor((new Date()).getTime() \/ 1000); }$/;"	f
+getCurrentUrlHandlers	vimiumFrontend.js	/^var getCurrentUrlHandlers = []; \/\/ function(url)$/;"	v
+getKeyChar	lib/keyboardUtils.js	/^function getKeyChar(event) {$/;"	f
+getLinkHintCss	background_page.html	/^  function getLinkHintCss(request) {$/;"	f
+getScrollPosition	background_page.html	/^  function getScrollPosition(tab, callback) {$/;"	f
+getSetting	background_page.html	/^  function getSetting(args, port) {$/;"	f
+getSetting	vimiumFrontend.js	/^function getSetting(key) {$/;"	f
+getVisibleClickableElements	linkHints.js	/^function getVisibleClickableElements() {$/;"	f
+getZoomLevel	background_page.html	/^  function getZoomLevel(args, port) {$/;"	f
+goBack	vimiumFrontend.js	/^function goBack() { history.back(); }$/;"	f
+goForward	vimiumFrontend.js	/^function goForward() { history.forward(); }$/;"	f
+handleDeleteForCommandMode	vimiumFrontend.js	/^function handleDeleteForCommandMode() {$/;"	f
+handleDeleteForFindMode	vimiumFrontend.js	/^function handleDeleteForFindMode() {$/;"	f
+handleEnterForCommandMode	vimiumFrontend.js	/^function handleEnterForCommandMode() {$/;"	f
+handleEnterForFindMode	vimiumFrontend.js	/^function handleEnterForFindMode() {$/;"	f
+handleKeyCharForCommandMode	vimiumFrontend.js	/^function handleKeyCharForCommandMode(keyChar) {$/;"	f
+handleKeyCharForFindMode	vimiumFrontend.js	/^function handleKeyCharForFindMode(keyChar) {$/;"	f
+handleKeyDown	background_page.html	/^  function handleKeyDown(key, port) {$/;"	f
+handleReturnScrollPosition	background_page.html	/^  function handleReturnScrollPosition(args) {$/;"	f
+handleUpdateScrollPosition	background_page.html	/^  function handleUpdateScrollPosition(request, sender) {$/;"	f
+hasModifiersRegex	vimiumFrontend.js	/^var hasModifiersRegex = \/^<([amc]-)+.>\/;$/;"	v
+helpDialogHtml	background_page.html	/^  function helpDialogHtml(showUnboundCommands, showCommandNames, customTitle) {$/;"	f
+helpDialogHtmlForCommandGroup	background_page.html	/^  function helpDialogHtmlForCommandGroup(group, commandsToKey, availableCommands,$/;"	f
+hideDialog	options.html	/^  function hideDialog() {$/;"	f
+hideHelpDialog	vimiumFrontend.js	/^function hideHelpDialog(clickEvent) {$/;"	f
+highlightLinkMatches	linkHints.js	/^function highlightLinkMatches(searchString) {$/;"	f
+hintKeystrokeQueue	linkHints.js	/^var hintKeystrokeQueue = [];$/;"	v
+hintMarkerContainingDiv	linkHints.js	/^var hintMarkerContainingDiv = null;$/;"	v
+hintMarkers	linkHints.js	/^var hintMarkers = [];$/;"	v
+init	background_page.html	/^  function init() {$/;"	f
+initializeOnDomReady	vimiumFrontend.js	/^function initializeOnDomReady() {$/;"	f
+initializeOptions	options.html	/^  function initializeOptions() {$/;"	f
+initializePreDomReady	vimiumFrontend.js	/^function initializePreDomReady() {$/;"	f
+initializeWhenEnabled	vimiumFrontend.js	/^function initializeWhenEnabled() {$/;"	f
+insertMode	vimiumFrontend.js	/^var insertMode = false;$/;"	v
+insertSpaces	vimiumFrontend.js	/^function insertSpaces(query) {$/;"	f
+isEditable	vimiumFrontend.js	/^function isEditable(target) {$/;"	f
+isEmbed	vimiumFrontend.js	/^function isEmbed(element) { return ["EMBED", "OBJECT"].indexOf(element.tagName) > 0; }$/;"	f
+isEnabledForUrl	background_page.html	/^  function isEnabledForUrl(args, port) {$/;"	f
+isEnabledForUrl	vimiumFrontend.js	/^var isEnabledForUrl = true;$/;"	v
+isEscape	lib/keyboardUtils.js	/^function isEscape(event) {$/;"	f
+isFocusable	vimiumFrontend.js	/^function isFocusable(element) { return isEditable(element) || isEmbed(element); }$/;"	f
+isPrimaryModifierKey	lib/keyboardUtils.js	/^function isPrimaryModifierKey(event) {$/;"	f
+isSelectable	linkHints.js	/^function isSelectable(element) {$/;"	f
+isShowingHelpDialog	vimiumFrontend.js	/^var isShowingHelpDialog = false;$/;"	v
+isVisible	linkHints.js	/^function isVisible(element, clientRect) {$/;"	f
+isVisible	test_harnesses/visibility_test.html	/^    function isVisible(element) {$/;"	f
+keyPort	vimiumFrontend.js	/^var keyPort;$/;"	v
+linkHintCss	vimiumFrontend.js	/^var linkHintCss;$/;"	v
+linkHintsCssAdded	linkHints.js	/^var linkHintsCssAdded = false;$/;"	v
+linkHintsModeActivated	linkHints.js	/^var linkHintsModeActivated = false;$/;"	v
+links	vimiumFrontend.js	/^    var links = HUD.upgradeNotificationElement().getElementsByTagName("a");$/;"	v
+logXOfBase	linkHints.js	/^function logXOfBase(x, base) { return Math.log(x) \/ Math.log(base); }$/;"	f
+mapKeyToCommand	commands.js	/^function mapKeyToCommand(key, command) {$/;"	f
+nextTab	background_page.html	/^  function nextTab(callback) { selectTab(callback, "next"); }$/;"	f
+normalizeKey	commands.js	/^function normalizeKey(key) {$/;"	f
+numberToHintString	linkHints.js	/^function numberToHintString(number, numHintDigits) {$/;"	f
+onBlurCapturePhase	vimiumFrontend.js	/^function onBlurCapturePhase(event) {$/;"	f
+onFocusCapturePhase	vimiumFrontend.js	/^function onFocusCapturePhase(event) {$/;"	f
+onKeyDownInLinkHintsMode	linkHints.js	/^function onKeyDownInLinkHintsMode(event) {$/;"	f
+onKeydown	vimiumFrontend.js	/^function onKeydown(event) {$/;"	f
+onOptionKeyup	options.html	/^  function onOptionKeyup(event) {$/;"	f
+openAdvancedOptions	options.html	/^  function openAdvancedOptions(event) {$/;"	f
+openOptionsPageInNewTab	background_page.html	/^  function openOptionsPageInNewTab() {$/;"	f
+performBackwardsFind	vimiumFrontend.js	/^function performBackwardsFind() {$/;"	f
+performFind	vimiumFrontend.js	/^function performFind() {$/;"	f
+performFindInPlace	vimiumFrontend.js	/^function performFindInPlace() {$/;"	f
+platform	lib/keyboardUtils.js	/^var platform;$/;"	v
+populateOptions	options.html	/^  function populateOptions() {$/;"	f
+populateSingleKeyCommands	background_page.html	/^  function populateSingleKeyCommands() {$/;"	f
+populateValidFirstKeys	background_page.html	/^  function populateValidFirstKeys() {$/;"	f
+previousTab	background_page.html	/^  function previousTab(callback) { selectTab(callback, "previous"); }$/;"	f
+refreshCompletionKeys	vimiumFrontend.js	/^function refreshCompletionKeys(completionKeys) {$/;"	f
+refreshCompletionKeysAfterMappingSave	background_page.html	/^  function refreshCompletionKeysAfterMappingSave() {$/;"	f
+reload	vimiumFrontend.js	/^function reload() { window.location.reload(); }$/;"	f
+removeTab	background_page.html	/^  function removeTab(callback) {$/;"	f
+repeatFunction	background_page.html	/^  function repeatFunction(func, totalCount, currentCount) {$/;"	f
+restoreTab	background_page.html	/^  function restoreTab(callback) {$/;"	f
+restoreToDefaults	options.html	/^  function restoreToDefaults() {$/;"	f
+saveOptions	options.html	/^  function saveOptions() {$/;"	f
+saveZoomLevel	background_page.html	/^  function saveZoomLevel(args) {$/;"	f
+saveZoomLevel	vimiumFrontend.js	/^function saveZoomLevel(domain, zoomLevel) {$/;"	f
+saveZoomLevelPort	vimiumFrontend.js	/^var saveZoomLevelPort;$/;"	v
+scrollDown	vimiumFrontend.js	/^function scrollDown() { window.scrollBy(0, settings["scrollStepSize"]); }$/;"	f
+scrollFullPageDown	vimiumFrontend.js	/^function scrollFullPageDown() { window.scrollBy(0, window.innerHeight); }$/;"	f
+scrollFullPageUp	vimiumFrontend.js	/^function scrollFullPageUp() { window.scrollBy(0, -window.innerHeight); }$/;"	f
+scrollLeft	vimiumFrontend.js	/^function scrollLeft() { window.scrollBy(-1 * settings["scrollStepSize"], 0); }$/;"	f
+scrollPageDown	vimiumFrontend.js	/^function scrollPageDown() { window.scrollBy(0, window.innerHeight \/ 2); }$/;"	f
+scrollPageUp	vimiumFrontend.js	/^function scrollPageUp() { window.scrollBy(0, -1 * window.innerHeight \/ 2); }$/;"	f
+scrollRight	vimiumFrontend.js	/^function scrollRight() { window.scrollBy(settings["scrollStepSize"], 0); }$/;"	f
+scrollToBottom	vimiumFrontend.js	/^function scrollToBottom() { window.scrollTo(0, document.body.scrollHeight); }$/;"	f
+scrollToTop	vimiumFrontend.js	/^function scrollToTop() { window.scrollTo(0, 0); }$/;"	f
+scrollUp	vimiumFrontend.js	/^function scrollUp() { window.scrollBy(0, -1 * settings["scrollStepSize"]); }$/;"	f
+selectTab	background_page.html	/^  function selectTab(callback, direction) {$/;"	f
+sendRequestToAllTabs	background_page.html	/^  function sendRequestToAllTabs(args) {$/;"	f
+setPageZoomLevel	vimiumFrontend.js	/^function setPageZoomLevel(zoomLevel, showUINotification) {$/;"	f
+setSetting	vimiumFrontend.js	/^function setSetting(args) { settings[args.key] = args.value; }$/;"	f
+settingPort	vimiumFrontend.js	/^var settingPort;$/;"	v
+settingsToLoad	vimiumFrontend.js	/^var settingsToLoad = ["scrollStepSize", "linkHintCharacters"];$/;"	v
+shouldOpenLinkHintInNewTab	linkHints.js	/^var shouldOpenLinkHintInNewTab = false;$/;"	v
+shouldShowUpgradeMessage	background_page.html	/^  function shouldShowUpgradeMessage() {$/;"	f
+showCommandModeHUDForQuery	vimiumFrontend.js	/^function showCommandModeHUDForQuery() {$/;"	f
+showDialog	options.html	/^  function showDialog(dialogId, dialogHtml) {$/;"	f
+showFindModeHUDForQuery	vimiumFrontend.js	/^function showFindModeHUDForQuery() {$/;"	f
+showHelp	background_page.html	/^  function showHelp() {$/;"	f
+showHelpDialog	vimiumFrontend.js	/^function showHelpDialog(html) {$/;"	f
+simulateClick	linkHints.js	/^function simulateClick(link) {$/;"	f
+splitKeyIntoFirstAndSecond	background_page.html	/^  function splitKeyIntoFirstAndSecond(key) {$/;"	f
+splitKeyQueue	background_page.html	/^  function splitKeyQueue(queue) {$/;"	f
+state.onUpdate	vimiumFrontend.js	/^    state.onUpdate = function(value) {$/;"	f
+toggleViewSource	vimiumFrontend.js	/^function toggleViewSource() {$/;"	f
+toggleViewSourceCallback	vimiumFrontend.js	/^function toggleViewSourceCallback(url) {$/;"	f
+unmapKey	commands.js	/^function unmapKey(key) { delete keyToCommandRegistry[key]; }$/;"	f
+updateLinkHints	linkHints.js	/^function updateLinkHints() {$/;"	f
+updateOpenTabs	background_page.html	/^  function updateOpenTabs(tab) {$/;"	f
+updatePositionsAndWindowsForAllTabsInWindow	background_page.html	/^  function updatePositionsAndWindowsForAllTabsInWindow(windowId) {$/;"	f
+updateScrollPosition	background_page.html	/^  function updateScrollPosition(tab, scrollX, scrollY) {$/;"	f
+upgradeNotificationClosed	background_page.html	/^  function upgradeNotificationClosed(request) {$/;"	f
+window.onbeforeunload	vimiumFrontend.js	/^window.onbeforeunload = function() {$/;"	f
+zoomIn	vimiumFrontend.js	/^function zoomIn() {$/;"	f
+zoomOut	vimiumFrontend.js	/^function zoomOut() {$/;"	f
