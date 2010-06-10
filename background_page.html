@@ -65,6 +65,7 @@
   };
 
   var sendRequestHandlers = {
+    processCommand: handleProcessCommand,
     getCompletionKeys: getCompletionKeys,
     getLinkHintCss: getLinkHintCss,
     openOptionsPageInNewTab: openOptionsPageInNewTab,
@@ -322,6 +323,21 @@
   function updateScrollPosition(tab, scrollX, scrollY) {
     openTabs[tab.id].scrollX = scrollX;
     openTabs[tab.id].scrollY = scrollY;
+  }
+
+  function handleProcessCommand(request, sender) {
+      processCommand(request.commandName, request.commandArgs);
+  }
+
+  var commandArgs= '';
+  function processCommand(commandName, args){
+      commandArgs= args;
+      eval("vimiumb_"+commandName+"();");
+      // alert("received command to process: " + commandName + ", " + args + ".");
+  }
+
+  function vimiumb_open(){
+      chrome.tabs.create({url: commandArgs});
   }
 
 

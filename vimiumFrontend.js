@@ -490,8 +490,13 @@ function executeCommand(name, args){
   eval("vimium_"+name+"(args)");
 }
 
-function vimium_open(callback){
-    chrome.tabs.create({}, function(tab) { callback(); });
+function vimium_open(site){
+  chrome.extension.sendRequest({ handler: "processCommand",
+      commandName: 'open', commandArgs: site});
+//    chrome.extension.sendRequest({greeting: "hello"}, function(response) {
+//              console.log(response.farewell);
+//              });
+    // chrome.tabs.create({}, function(tab) { callback(); });
 }
 
 /*
