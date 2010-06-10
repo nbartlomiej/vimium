@@ -13,6 +13,7 @@
   var tabQueue = {}; // windowId -> Array
   var openTabs = {}; // tabId -> object with various tab properties
   var keyQueue = ""; // Queue of keys typed
+  var persistentKeyQueue = "";
   var validFirstKeys = {};
   var singleKeyCommands = [];
 
@@ -277,6 +278,19 @@
   }
 
   // Start action functions
+  function enterCommandModeShortcut(){
+    chrome.tabs.getSelected(null,function(tab) {
+
+      var currentSite = tab.url;
+
+      fullCommand = shortcuts[persistentKeyQueue].replace("$activeUrl", currentSite);
+
+      chrome.tabs.sendRequest(tab.id, {name: "enterCommandModeShortcut", command: fullCommand } );
+
+    });
+
+  }
+
   function createTab(callback) {
     chrome.tabs.create({}, function(tab) { callback(); });
   }
@@ -332,12 +346,40 @@
   var commandArgs= '';
   function processCommand(commandName, args){
       commandArgs= args;
-      eval("vimiumb_"+commandName+"();");
-      // alert("received command to process: " + commandName + ", " + args + ".");
+      eval("vimium_"+commandName+"();");
   }
 
-  function vimiumb_open(){
-      chrome.tabs.create({url: commandArgs});
+  String.prototype.startsWith = function(str)
+  {return (this.match("^"+str)==str)}
+
+  function vimium_open(){
+      var url = commandArgs;
+      // if the url contains no dot, consider it
+      // a query for google search engin
+      if (url.indexOf(".")<0){
+          url="http://www.google.com/search?q="+url;
+      }
+      // appending http:// if not present, we add it.
+      if (url.startsWith("http://") == false){
+          url="http://"+url;
+      }
+      chrome.tabs.getSelected(null,function(tab) {
+        chrome.tabs.update(tab.id, {url: url});
+      });
+  }
+
+  function vimium_tabnew(){
+      var url = commandArgs;
+      // if the url contains no dot, consider it
+      // a query for google search engin
+      if (url.indexOf(".")<0){
+          url="http://www.google.com/search?q="+url;
+      }
+      // appending http:// if not present, we add it.
+      if (url.startsWith("http://") == false){
+          url="http://"+url;
+      }
+      chrome.tabs.create({url: url});
   }
 
 
@@ -504,6 +546,7 @@
     }
     else {
       console.log("checking keyQueue: [", keyQueue + key, "]");
+      persistentKeyQueue = keyQueue + key;
       keyQueue = checkKeyQueue(keyQueue + key, port.tab.id);
       console.log("new KeyQueue: " + keyQueue);
     }

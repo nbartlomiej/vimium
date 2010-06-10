@@ -71,6 +71,8 @@ function initializePreDomReady() {
         showHelpDialog(request.dialogHtml);
     else if (request.name == "refreshCompletionKeys")
       refreshCompletionKeys(request.completionKeys);
+    else if (request.name == "enterCommandModeShortcut")
+      enterCommandModeShortcut(request.command);
     sendResponse({}); // Free up the resources used by this open connection.
   });
 
@@ -234,6 +236,7 @@ function toggleViewSourceCallback(url) {
  */
 function onKeydown(event) {
   var keyChar = "";
+
 
   if (linkHintsModeActivated)
     return;
@@ -490,14 +493,19 @@ function executeCommand(name, args){
   eval("vimium_"+name+"(args)");
 }
 
-function vimium_open(site){
+function delegateCommand(commandName, commandArgs){
   chrome.extension.sendRequest({ handler: "processCommand",
-      commandName: 'open', commandArgs: site});
-//    chrome.extension.sendRequest({greeting: "hello"}, function(response) {
-//              console.log(response.farewell);
-//              });
-    // chrome.tabs.create({}, function(tab) { callback(); });
+      commandName: commandName, commandArgs: commandArgs});
 }
+
+function vimium_open(site){
+  delegateCommand('open', site);
+}
+
+function vimium_tabnew(site){
+  delegateCommand('tabnew', site);
+}
+
 
 /*
  * We need this so that the find mode HUD doesn't match its own searches.
@@ -531,6 +539,12 @@ function enterCommandMode() {
   commandModeQuery = "";
   commandMode = true;
   HUD.show(":");
+}
+
+function enterCommandModeShortcut(command){
+    enterCommandMode();
+    commandModeQuery=command;
+    HUD.show(":"+command);
 }
 
 function exitCommandMode() {
