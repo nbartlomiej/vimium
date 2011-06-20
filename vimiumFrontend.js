@@ -11,6 +11,8 @@ var insertModeLock = null;
 var findMode = false;
 var findModeQuery = "";
 var findModeQueryHasResults = false;
+var commandMode = false;
+var commandModeQuery = "";
 var isShowingHelpDialog = false;
 var handlerStack = [];
 var keyPort;
@@ -108,8 +110,6 @@ function initializePreDomReady() {
     } else if (request.name == "focusFrame") {
       if (frameId == request.frameId)
         focusThisFrame(request.highlight);
-    } else if (request.name == "refreshCompletionKeys") {
-      refreshCompletionKeys(request);
     }
     sendResponse({}); // Free up the resources used by this open connection.
   });
@@ -118,7 +118,9 @@ function initializePreDomReady() {
     if (port.name == "executePageCommand") {
       port.onMessage.addListener(function(args) {
         if (frameId == args.frameId) {
-          if (args.passCountToFunction) {
+          if (args.parameter){
+            utils.invokeCommandString(args.command, [args.parameter]);
+          } else if (args.passCountToFunction) {
             utils.invokeCommandString(args.command, [args.count]);
           } else {
             for (var i = 0; i < args.count; i++) { utils.invokeCommandString(args.command); }
@@ -375,7 +377,14 @@ function onKeypress(event) {
         // Don't let the space scroll us if we're searching.
         if (event.keyCode == keyCodes.space)
           event.preventDefault();
-      } else if (!isInsertMode() && !findMode) {
+      } else if (commandMode){
+        handleKeyCharForCommandMode(keyChar);
+
+        // Don't let the space scroll us if we're searching.
+        if (event.keyCode == keyCodes.space)
+          event.preventDefault();
+
+      } else if (!isInsertMode() && !findMode && !commandMode) {
         if (currentCompletionKeys.indexOf(keyChar) != -1) {
           event.preventDefault();
           event.stopPropagation();
@@ -441,24 +450,34 @@ function onKeydown(event) {
         event.stopPropagation();
     }
   }
-  else if (findMode)
-  {
+  else if (findMode) {
     if (isEscape(event))
       exitFindMode();
     // Don't let backspace take us back in history.
-    else if (event.keyCode == keyCodes.backspace || event.keyCode == keyCodes.deleteKey)
-    {
+    else if (event.keyCode == keyCodes.backspace || event.keyCode == keyCodes.deleteKey) {
       handleDeleteForFindMode();
       event.preventDefault();
-    }
-    else if (event.keyCode == keyCodes.enter)
+    } else if (event.keyCode == keyCodes.enter) {
       handleEnterForFindMode();
-  }
-  else if (isShowingHelpDialog && isEscape(event))
-  {
+    }
+  } else if (commandMode){
+    if (isEscape(event)){
+      exitCommandMode();
+    } else if (keyChar) {
+      handleKeyCharForCommandMode(keyChar);
+      // Don't let the space scroll us if we're typing an command.
+      if (event.keyCode == keyCodes.space)
+        event.preventDefault();
+    } else if (event.keyCode == keyCodes.backspace || event.keyCode == keyCodes.deleteKey) {
+      // Don't let backspace take us back in history.
+      handleDeleteForCommandMode();
+      event.preventDefault();
+    } else if (event.keyCode == keyCodes.enter) {
+        handleEnterForCommandMode();
+    }
+  } else if (isShowingHelpDialog && isEscape(event)) {
     hideHelpDialog();
-  }
-  else if (!isInsertMode() && !findMode) {
+  } else if (!isInsertMode() && !findMode) {
     if (keyChar) {
         if (currentCompletionKeys.indexOf(keyChar) != -1) {
             event.preventDefault();
@@ -466,8 +485,7 @@ function onKeydown(event) {
         }
 
         keyPort.postMessage({keyChar:keyChar, frameId:frameId});
-    }
-    else if (isEscape(event)) {
+    } else if (isEscape(event)) {
       keyPort.postMessage({keyChar:"<ESC>", frameId:frameId});
     }
   }
@@ -698,6 +716,60 @@ function showFindModeHUDForQuery() {
     HUD.show("/" + insertSpaces(findModeQuery + " (No Matches)"));
 }
 
+function handleKeyCharForCommandMode(keyChar) {
+  commandModeQuery = commandModeQuery + keyChar;
+  showCommandModeHUDForQuery();
+}
+
+function handleDeleteForCommandMode() {
+  if (commandModeQuery.length == 0)
+  {
+    exitCommandMode();
+  }
+  else
+  {
+    commandModeQuery = commandModeQuery.substring(0, commandModeQuery.length - 1);
+    showCommandModeHUDForQuery();
+  }
+}
+
+function handleEnterForCommandMode() {
+  exitCommandMode();
+  var commandName, commandArgs;
+  var spacePosition = commandModeQuery.indexOf(' ');
+  if (spacePosition >= 0) 
+  {
+    commandName = commandModeQuery.substring(0, spacePosition);
+    commandArgs = commandModeQuery.substring(spacePosition+1, commandModeQuery.length);
+  }
+  else
+  {
+    commandName = commandModeQuery
+  }
+  executeCommand(commandName, commandArgs);
+}
+
+function showCommandModeHUDForQuery() {
+  HUD.show(":"+commandModeQuery);
+}
+
+function executeCommand(name, args){
+  eval("vimium_"+name+"(args)");
+}
+
+function delegateCommand(commandName, commandArgs){
+  chrome.extension.sendRequest({ handler: "processCommand",
+      commandName: commandName, commandArgs: commandArgs});
+}
+
+function vimium_open(site){
+  delegateCommand('open', site);
+}
+
+function vimium_tabnew(site){
+  delegateCommand('tabnew', site);
+}
+
 /*
  * We need this so that the find mode HUD doesn't match its own searches.
  */
@@ -724,6 +796,24 @@ function enterFindMode() {
 function exitFindMode() {
   findMode = false;
   focusFoundLink();
+  HUD.hide();
+}
+
+function enterCommandMode() {
+  commandModeQuery = "";
+  commandMode = true;
+  HUD.show(":");
+}
+
+function enterCommandModeShortcut(command){
+  console.log('command: '+ command);
+  enterCommandMode();
+  commandModeQuery=command;
+  HUD.show(":"+command);
+}
+
+function exitCommandMode() {
+  commandMode = false;
   HUD.hide();
 }
 

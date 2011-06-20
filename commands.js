@@ -1,5 +1,6 @@
 var availableCommands    = {};
 var keyToCommandRegistry = {};
+var shortcuts            = {};
 
 /*
  * Registers a command, making it available to be optionally bound to a key.
@@ -28,6 +29,7 @@ function mapKeyToCommand(key, command) {
   }
 
   keyToCommandRegistry[key] = { command: command,
+                                parameter: shortcuts[key],
                                 isBackgroundCommand: availableCommands[command].isBackgroundCommand,
                                 passCountToFunction: availableCommands[command].passCountToFunction
                               };
@@ -84,6 +86,15 @@ function parseCustomKeyMappings(customKeyMappings) {
   }
 }
 
+
+shortcuts = {
+  o: 'open ',
+  O: "open $activeUrl",
+  t: 'tabnew ',
+  T: "tabnew $activeUrl"
+};
+
+
 function clearKeyMappingsAndSetDefaults() {
   keyToCommandRegistry = {};
 
@@ -93,7 +104,6 @@ function clearKeyMappingsAndSetDefaults() {
     "k": "scrollUp",
     "h": "scrollLeft",
     "l": "scrollRight",
-    "gg": "scrollToTop",
     "G": "scrollToBottom",
     "zH": "scrollToLeft",
     "zL": "scrollToRight",
@@ -135,7 +145,8 @@ function clearKeyMappingsAndSetDefaults() {
     "gt": "nextTab",
     "gT": "previousTab",
 
-    "t": "createTab",
+    // "t": "createTab",
+    ":": "enterCommandMode",
     "x": "removeTab",
     "X": "restoreTab",
 
@@ -147,6 +158,11 @@ function clearKeyMappingsAndSetDefaults() {
 
   for (var key in defaultKeyMappings)
     mapKeyToCommand(key, defaultKeyMappings[key]);
+
+
+  for (var shortcut in shortcuts){
+    mapKeyToCommand(shortcut, 'enterCommandModeShortcut');
+  }
 }
 
 // This is a mapping of: commandIdentifier => [description, options].
@@ -206,6 +222,9 @@ var commandDescriptions = {
   activateBookmarkFindMode: ["Open a bookmark in the current tab"],
   activateBookmarkFindModeToOpenInNewTab: ["Open a bookmark in a new tab"],
 
+  enterCommandMode: ["Enter command mode"],
+  enterCommandModeShortcut: ["Shortcut for entering command mode"],
+
   nextFrame: ["Cycle forward to the next frame on the page", { background: true, passCountToFunction: true }]
 };
 
@@ -224,7 +243,7 @@ var commandGroups = {
      "enterInsertMode", "focusInput",
      "linkHints.activateMode", "linkHints.activateModeToOpenInNewTab", "linkHints.activateModeWithQueue",
      "goPrevious", "goNext", "nextFrame"],
-  findCommands: ["enterFindMode", "performFind", "performBackwardsFind"],
+  findCommands: ["enterFindMode", "performFind", "performBackwardsFind", "enterCommandMode", "enterCommandModeShortcut" ],
   historyNavigation:
     ["goBack", "goForward"],
   tabManipulation:
