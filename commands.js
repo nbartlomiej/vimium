@@ -243,7 +243,7 @@ var commandGroups = {
      "enterInsertMode", "focusInput",
      "linkHints.activateMode", "linkHints.activateModeToOpenInNewTab", "linkHints.activateModeWithQueue",
      "goPrevious", "goNext", "nextFrame"],
-  findCommands: ["enterFindMode", "performFind", "performBackwardsFind", "enterCommandMode", "enterCommandModeShortcut" ],
+  findCommands: ["enterFindMode", "performFind", "performBackwardsFind"],
   historyNavigation:
     ["goBack", "goForward"],
   tabManipulation:
@@ -258,4 +258,4 @@ var commandGroups = {
 var advancedCommands = [
     "scrollToLeft", "scrollToRight",
     "zoomReset", "goUp", "focusInput", "linkHints.activateModeWithQueue",
-    "goPrevious", "goNext"];
+    "goPrevious", "goNext", "enterCommandMode", "enterCommandModeShortcut" ];
