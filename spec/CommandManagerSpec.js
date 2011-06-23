@@ -49,9 +49,13 @@ describe("CommandManager", function() {
     beforeEach(function(){
       scrollTo = spyOn(window, 'scrollTo')
     });
-    it('provides scrollToBottom', function(){
-      commandManager.get('scrollToBottom').execute();
+    it('provides scroll to bottom', function(){
+      commandManager.bindings('G').pop().execute();
       expect(scrollTo).toHaveBeenCalledWith(window.pageXOffset, document.body.scrollHeight);
+    });
+    it('provides scroll to top', function(){
+      commandManager.bindings('gg').pop().execute();
+      expect(scrollTo).toHaveBeenCalledWith(window.pageXOffset, 0);
     });
   });
 

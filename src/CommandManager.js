@@ -24,23 +24,16 @@ CommandManager.prototype.get = function(commandName){
 
 var globalCommands = [];
 
-var scrollActions = ({
-  scrollToBottom: function() {
-    window.scrollTo(window.pageXOffset, document.body.scrollHeight);
-  },
-  scrollToTop: function() {
+var commands = {
+  'gg': new Command('scrollToTop', function() {
     window.scrollTo(window.pageXOffset, 0);
-  },
-  scrollToLeft: function() {
-    window.scrollTo(0, window.pageYOffset);
-  },
-  scrollToRight: function() {
-    window.scrollTo(document.body.scrollWidth, window.pageYOffset);
-  }
-});
+  }),
+  'G': new Command('scrollToBottom', function() {
+    window.scrollTo(window.pageXOffset, document.body.scrollHeight);
+  })
+};
 
-for (action in scrollActions){
-  var c = new Command(action, scrollActions[action]);
-  globalCommands.push(c);
+for (mapping in commands){
+  commands[mapping].bind(mapping);
+  globalCommands.push(commands[mapping]);
 }
-
