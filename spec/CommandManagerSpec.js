@@ -18,7 +18,7 @@ describe("CommandManager", function() {
         console.log("Hello world from a mock command 'helloWorld'");
       })
       helloWorld.bind('a');
-      commandManager.commands.push(helloWorld);
+      commandManager.commands().push(helloWorld);
     });
 
     it('remembers the bindings', function(){
