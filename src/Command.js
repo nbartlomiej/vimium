@@ -1,6 +1,9 @@
-function Command(action){
-  Command.prototype.execute = function(){
-    return action;
+function Command(private_name, action){
+  this.name = function(){
+    return private_name;
+  };
+  this.execute = function(){
+    return action();
   };
 };
 

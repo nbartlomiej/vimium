@@ -1,10 +1,13 @@
 function CommandManager(){
   var private_commands = [];
 
+  for (command in globalCommands){
+    private_commands.push(globalCommands[command]);
+  }
+
   CommandManager.prototype.commands = function(){
     return private_commands;
   };
-
 };
 
 CommandManager.prototype.bindings = function(key){
@@ -13,7 +16,15 @@ CommandManager.prototype.bindings = function(key){
   });
 };
 
-var a = ({
+CommandManager.prototype.get = function(commandName){
+  return this.commands().filter(function(c){
+    return c.name() === commandName
+  }).pop();
+};
+
+var globalCommands = [];
+
+var scrollActions = ({
   scrollToBottom: function() {
     window.scrollTo(window.pageXOffset, document.body.scrollHeight);
   },
@@ -28,4 +39,8 @@ var a = ({
   }
 });
 
-console.log(a.keys);
+for (action in scrollActions){
+  var c = new Command(action, scrollActions[action]);
+  globalCommands.push(c);
+}
+

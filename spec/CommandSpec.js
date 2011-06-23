@@ -10,6 +10,9 @@ describe("Command", function() {
     it('returns defined object', function(){
       expect(command).toBeDefined();
     });
+    it("sets the command's name", function(){
+      expect(command.name()).toEqual('helloWorld');
+    });
   });
 
   describe('#bind(key)', function(){
@@ -24,6 +27,17 @@ describe("Command", function() {
     });
     it('returns most recend binding', function(){
       expect(command.binding).toEqual('a');
+    });
+  });
+
+  describe('#execute()', function(){
+    var log;
+    beforeEach(function(){
+      log = spyOn(console, 'log');
+      command.execute();
+    });
+    it('executes the command', function(){
+      expect(log).toHaveBeenCalledWith("Hello world from mock command 'helloWorld'");
     });
   });
 
