@@ -5,42 +5,30 @@ describe("CommandManager", function() {
   });
 
   describe("constructor", function() {
-    it('is defined', function(){
+    it('returns defined object', function(){
       expect(commandManager).toBeDefined();
     });
-    it('has no commands', function(){
-      expect(commandManager.commands.length).toBe(0);
-    });
   });
 
-  describe('#addCommand()', function(){
+  describe('#bindings', function(){
     var helloWorld;
+
     beforeEach(function(){
-      helloWorld = new Command('helloWorld', function(){
-        console.log("Hello world from test command called 'helloWorld'!");
-      });
+      helloWorld = new Command('helloworld', function(){
+        console.log("Hello world from a mock command 'helloWorld'");
+      })
+      helloWorld.bind('a');
+      commandManager.commands.push(helloWorld);
     });
 
-    it('returns true on successful add', function(){
-      expect(commandManager.addCommand(helloWorld)).toBe(true);
+    it('remembers the bindings', function(){
+      expect(commandManager.bindings('a')).toEqual([helloWorld]);
     });
-    it('remembers new commands', function(){
-      commandManager.addCommand(helloWorld);
-      expect(commandManager.commands.length).toBe(1);
-    });
-  });
 
-  describe ('#getCommand()', function(){
-    var helloWorld;
-    beforeEach(function(){
-      helloWorld = new Command('helloWorld', function(){
-        console.log("Hello world from test command called 'helloWorld'!");
-      });
-      commandManager.addCommand(helloWorld);
+    it('is empty when no bindings', function(){
+      expect(commandManager.bindings('b')).toEqual([]);
     });
-    it('returns exactly the same thing', function(){
-      expect(commandManager.getCommand(helloWorld)===helloWorld).toBeTruthy();
-    });
+
   });
 
 });
